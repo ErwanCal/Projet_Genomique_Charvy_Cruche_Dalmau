@@ -78,7 +78,7 @@ def DC3(S, P_12_base = []) :
         else :
             order_count += 1
     
-    #print(index_12, DC3_table)
+    #print(DC3_table, index_12)
     
     if recur == True :
         new_S = [] # On crée T' la séquence des orders suivant l'ordre de P12
@@ -126,15 +126,15 @@ def DC3(S, P_12_base = []) :
             index_012.append(index_0[i_0])
             i_0 += 1
         else : # Cas d'égalité sur l'indice : si les 2 indexes renvoient le même nombre 
-            if i_12 % 3 == 1 :
-                if index_12.index(index_12[i_0 + 1]) < index_12.index(index_12[i_12 + 1]) : # Cas où index 12 au deuxième terme arrive avant index 0 au deuxième terme
+            if index_12[i_12] % 3 == 1 :
+                if index_12.index(index_0[i_0] + 1) > index_12.index(index_12[i_12] + 1) : # Cas où index 12 au deuxième terme arrive avant index 0 au deuxième terme
                     index_012.append(index_12[i_12])
                     i_12 += 1
                 else : # Cas où index 0 au deuxième terme arrive avant index 12 au deuxième terme
                     index_012.append(index_0[i_0])
                     i_0 += 1
-            else : 
-                if int(DC3_table[1][index_12[i_0 + 2]]) < int(DC3_table[1][index_12[i_12 + 1]]) : # Cas où index 12 au deuxième terme arrive avant index 0 au troisième terme
+            else :
+                if index_12.index(index_0[i_0] + 2) > index_12.index(index_12[i_12] + 2) : # Cas où index 12 au deuxième terme arrive avant index 0 au troisième terme
                     index_012.append(index_12[i_12])
                     i_12 += 1
                 else : # Cas où index 0 au troisième terme arrive avant index 12 au deuxième terme
