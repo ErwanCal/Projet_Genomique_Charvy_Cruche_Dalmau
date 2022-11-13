@@ -37,6 +37,11 @@ def DC3(S, P_12_base = []) :
          for i in range(len(S)) :
             DC3_table[1][i] =  S[i] # Cas où l'on rentre dans la boucle une deuxième fois ou plus, pas de conversion
     
+    # Cas où la chaine n'est composé que d'une seule lettre : trivial car DC3 = ordre des indices en décroissant
+    if (sum(DC3_table[1])/len(S) == DC3_table[1][0]) : # On teste si la chaine n'est composé que d'une seule lettre
+        return [*range(len(S)-1,-1,-1)]
+    
+    
     """
     for i in range(len(S), len(S) + 3, 1) :
         conversion_l.append(0) # Ajout des 3 caractères sentinelles # A garder si pas tables de 0
@@ -107,7 +112,7 @@ def DC3(S, P_12_base = []) :
     for k in range(len(R_0)) : # On parcours tous les doublets triés
        index_0.append(R_0[k][1]) # On récupère l'indice
     
-    #print(index_0, index_12)
+    print(DC3_table[0:2], index_0, index_12)
     
     index_012 = [] # On crée l'index final en ordonant 0 et 1,2
     i_0 = 0
@@ -134,7 +139,13 @@ def DC3(S, P_12_base = []) :
                     index_012.append(index_0[i_0])
                     i_0 += 1
             else :
-                if index_12.index(index_0[i_0] + 2) > index_12.index(index_12[i_12] + 2) : # Cas où index 12 au deuxième terme arrive avant index 0 au troisième terme
+                if int(DC3_table[1][index_0[i_0] + 1]) > int(DC3_table[1][index_12[i_12] + 1]) : # On teste dabord cas où index 12 + 1 arrive avant index 0 + 1
+                    index_012.append(index_12[i_12])
+                    i_12 += 1
+                elif int(DC3_table[1][index_0[i_0] + 2]) < int(DC3_table[1][index_12[i_12] + 2]) : # Cas où index 0 + 1 arrive avant index 12 + 1
+                    index_012.append(index_0[i_0])
+                    i_0 += 1
+                elif index_12.index(index_0[i_0] + 2) > index_12.index(index_12[i_12] + 2) : # Cas où index 12 au deuxième terme arrive avant index 0 au troisième terme
                     index_012.append(index_12[i_12])
                     i_12 += 1
                 else : # Cas où index 0 au troisième terme arrive avant index 12 au deuxième terme
