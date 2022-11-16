@@ -147,10 +147,11 @@ def DC3(S, P_12_base = []) :
                 if int(DC3_table[1][index_0[i_0] + 1]) > int(DC3_table[1][index_12[i_12] + 1]) : # On teste dabord cas où index 12 + 1 arrive avant index 0 + 1
                     index_012.append(index_12[i_12])
                     i_12 += 1
-                elif int(DC3_table[1][index_0[i_0] + 2]) < int(DC3_table[1][index_12[i_12] + 2]) : # Cas où index 0 + 1 arrive avant index 12 + 1
+                elif int(DC3_table[1][index_0[i_0] + 1]) < int(DC3_table[1][index_12[i_12] + 1]) : # Cas où index 0 + 1 arrive avant index 12 + 1
                     index_012.append(index_0[i_0])
                     i_0 += 1
                 elif index_12.index(index_0[i_0] + 2) > index_12.index(index_12[i_12] + 2) : # Cas où index 12 au deuxième terme arrive avant index 0 au troisième terme
+                    
                     index_012.append(index_12[i_12])
                     i_12 += 1
                 else : # Cas où index 0 au troisième terme arrive avant index 12 au deuxième terme
