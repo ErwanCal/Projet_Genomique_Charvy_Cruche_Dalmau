@@ -38,8 +38,13 @@ def DC3(S, P_12_base = []) :
             DC3_table[1][i] =  S[i] # Cas où l'on rentre dans la boucle une deuxième fois ou plus, pas de conversion
     
     # Cas où la chaine n'est composé que d'une seule lettre : trivial car DC3 = ordre des indices en décroissant
-    if (sum(DC3_table[1])/len(S) == DC3_table[1][0]) : # On teste si la chaine n'est composé que d'une seule lettre
-        return [*range(len(S)-1,-1,-1)]
+    equal = True
+    for i in range(len(S)) :
+        if DC3_table[1][0] != DC3_table[1][i] :
+            equal = False
+            break # On teste si la chaine n'est composé que d'une seule lettre
+    if equal == True :
+         return [*range(len(S)-1,-1,-1)]
     
     
     """
@@ -112,7 +117,7 @@ def DC3(S, P_12_base = []) :
     for k in range(len(R_0)) : # On parcours tous les doublets triés
        index_0.append(R_0[k][1]) # On récupère l'indice
     
-    print(DC3_table[0:2], index_0, index_12)
+    #print(DC3_table[0:2], index_0, index_12)
     
     index_012 = [] # On crée l'index final en ordonant 0 et 1,2
     i_0 = 0
@@ -169,6 +174,5 @@ def DC3(S, P_12_base = []) :
     
 
     return index_012 # Retourne le suffix array si dernière récursion
-
 
 print(DC3("abcabcacab"))
