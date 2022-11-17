@@ -59,6 +59,14 @@ def pattern_matching_BWT(S,pattern):
     for tpl in total:
         som += tpl[1]
         somme.append((tpl[0],som))
+    '''
+    test de recuperation index
+    '''
+    start_string = -1
+    end_string = -1
+    '''
+    fin du test
+    '''
     ##init des valeurs utiles pour la substring search
     e = 0
     f = len(L)
@@ -84,34 +92,41 @@ def pattern_matching_BWT(S,pattern):
                 suite_impos= False
                 prev = 0
                 id = index[u]
+                start_string = u
                 for tpl in somme :
                     if tpl[0]<Y:
                         prev = tpl[1]
                 e = prev + id[1]-1
-            if(suite_impos==False):
+            if(suite_impos==False):##we use the boolean to exit the loop early
                 break
-        char_found = False
+        char_found = False  ##this allows to exit the loop early if the char has been found
         for u in reversed(range(r,s+1)):
             if L[u]==Y:
                 char_found = True
                 prev = 0
                 id = index[u]
+                end_string = u
                 for tpl in somme :
                     if tpl[0]<Y:
                         prev = tpl[1]
                 f = prev + id[1]-1
             if(char_found):
                 break
-        if suite_impos :
+        if suite_impos :## this will stop the loop if no char has been found in the previous one
             break
         i-=1
     ##dans le cas où e = f, il faut vérifier que le reste du substring est bon
+    print(Y, "?")
+    print("lestart ",start_string," end ",end_string)
     if i > 0 :
         while i > 0 :
             if L[e] != lpattern[i-1]:
                 break
+            print(L[e])
             prev = 0
             id=index[e]
+            ##start_string = e
+            ##end_string = e
             for tpl in somme :
                 if tpl[0]<L[e]:
                     prev = tpl[1]
@@ -123,14 +138,43 @@ def pattern_matching_BWT(S,pattern):
     if suite_impos:
         i = 0
         pattern_in_S = False
-    return pattern_in_S
+    print("start ",start_string," end ",end_string)
+    return pattern_in_S,start_string,end_string
 
-T = "TTTCCAATTAATTATCAAGTCTGTTTTCCAATTAATTATCAAGTCTGTTTTGGGTTTCCAATTAATTATCAAGTTTCCAATTAATTATCAAGTCTGTTTTGGGTTTCCAATTAATTATCAAGTCTGTTTTGGGACTCTGCATCTGTTTTGGGACTCTGCATTTGGGTTTCCAATTAATTATCAAGTCTGTTTTGGGACTCTGCA"
-T2 = "TTTCCAATTAATTATCAAGTCTGTTTTGGGTTTCCAATTAATTATCACCAGTCTGTTTTGGGACTCTGCACCTAATCCCCAACACTTTGAGAAACACTTTGAG"
+def string_location(text,string):
+    '''
+    Gives the position of each occurence of the substring in the text
+
+    Args :
+        text (string) : the text to search in
+        string (string) : the substring to be searched
+
+    Return :
+        ???
+    '''
+    result = pattern_matching_BWT(text,string)
+    sft = DC3.DC3(text)
+    list_occur = []
+    if result[0] == False :
+        print("No occurence of the substring was found")
+        list_occur.append(-1)
+    else :
+        for i in range(result[1],(result[2]+1)):
+            print("i ",i)
+            id = sft[i] - 1 ##id = 66 pour bon result
+            print(sft)
+            print(id)
+            list_occur.append(id)
+            print(T[id:id+len(string)])
+    print(list_occur)
+
+T2 = "TTTCCAATTAATTATCAAGTCTGTTTTCCAATACTAGCTGCATCGATCGTAAGCATCAAGTCTGTTTTGGGTTTCCAATTAATTATCAAGTTTCCAATTAATTATCAAGTCTGTTTTGGGTTTCCAATTAATTATCAAGTCTGTTTTGGGACTCTGCATCTGTTTTGGGACTCTGCATTTGGGTTTCCAATTAATTATCAAGTCTGTTTTGGGACTCTGCA"
+T = "TTTCCAATTAATTATCAAGTCTGTTTTGGGTTTCCAATTAATTATCACCAGTCTGTTTTGGGACTCTGCACCTAATCCCCAACACTTTGAGAAACACTTTGAG"
 patt2 = "ATCAA"
-patt1 = "TGCACC"
+patt3 = "TGCATC"
+patt = "TGCACC"
 print(len(T))
-pat = pattern_matching_BWT(T2,patt2)
-print(pat)
+string_location(T,patt)
+
 ##print(BWT(T))
 ##le dollar permet d'eviter pattern sur fin/debut (chevauchement)
