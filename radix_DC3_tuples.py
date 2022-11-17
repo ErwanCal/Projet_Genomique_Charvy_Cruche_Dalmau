@@ -26,8 +26,14 @@ def counting_sort(array,digit,p): ##The counting sort is a stable sort used in t
         array[i] = arr_ord[i]
 def radix_sort(array,p):##Here the radix sort is modified to work with the triplet list sent by the DC3
 ##The code is not flexible enough to compute all characters in the ascii table, but it's enough for the use needed
-    ##1) we take max = 100 because A T C G are all below 100 in ascii code
-    mx = 100
+    ##1) we search for the max in the nuplets
+    mx = 0
+    for tpl in array:
+        n_uplet = tpl[0]
+        if n_uplet[-1] > mx :
+            mx = n_uplet[-1]
+    if mx < 100 : ##we take max = 100 because A T C G are all below 100 in ascii code
+        mx = 100
     '''##2) to know how many loops we have to do, we will use a variable to represent,
     the digit we are currently in'''
     for i in reversed(range(0,p)):
@@ -36,9 +42,9 @@ def radix_sort(array,p):##Here the radix sort is modified to work with the tripl
             counting_sort(array,digit,i)
             digit *= 10 ##digit will go to the tens, the hundreds, the thousands...
 
-lis_test=[([98,99,97],3),([98,99,97],4),([99,97,98],2),([0,0,0],5),([99,97,98],1),([99,97,99],6),([97,98,0],7)]
+'''lis_test=[([98,99,197],3),([98,36,97],4),([36,97,98],2),([0,0,0],5),([98,99,98],1),([99,97,99],6),([97,98,0],7)]
 radix_sort(lis_test,3)
 print(lis_test)
-lis_test=[([98,99],1),([98,99],2),([99,97],3),([0,0],4),([99,97],5),([99,97],6),([97,98],7)]
+lis_test=[([98,99],1),([98,99],2),([99,97],3),([0,0],4),([99,98],5),([99,197],6),([97,98],7)]
 radix_sort(lis_test,2)
-print(lis_test)
+print(lis_test)'''
