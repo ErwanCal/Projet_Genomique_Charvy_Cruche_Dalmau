@@ -20,7 +20,7 @@ def counting_sort(array,digit,p): ##The counting sort is a stable sort used in t
 def radix_sort(array,p):##Here the radix sort is modified to work with the triplet list sent by the DC3
 ##The code is not flexible enough to compute all characters in the ascii table, but it's enough for the use needed
     ##1) we search for the max in the nuplets
-    max = 0
+    mx = 0
     if p == 3 : ##we take max = 100 because A T C G are all below 100 in ascii code
         mx = 100
     else :
