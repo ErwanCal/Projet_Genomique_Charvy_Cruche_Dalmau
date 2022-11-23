@@ -20,14 +20,13 @@ def counting_sort(array,digit,p): ##The counting sort is a stable sort used in t
 def radix_sort(array,p):##Here the radix sort is modified to work with the triplet list sent by the DC3
 ##The code is not flexible enough to compute all characters in the ascii table, but it's enough for the use needed
     ##1) we search for the max in the nuplets
-    max = 0
-    if p == 3 : ##we take max = 100 because A T C G are all below 100 in ascii code
-        mx = 100
-    else :
+    mx = 100
+    if p != 3 : ##we take max = 100 because A T C G are all below 100 in ascii code
+        mx = (max(array)[0])[0]+1
         for tpl in array:
             n_uplet = tpl[0]
             if n_uplet[-1] > mx :
-                mx = n_uplet[-1]
+                mx = n_uplet[-1]+1
     '''##2) to know how many loops we have to do, we will use a variable to represent,
     the digit we are currently in'''
     for i in reversed(range(0,p)):
@@ -40,7 +39,9 @@ def radix_sort(array,p):##Here the radix sort is modified to work with the tripl
 import listest
 print("Hello")
 '''
-
+test = [[[65, 9], 0], [[67, 6], 3], [[84, 1], 12], [[65, 2], 13], [[25, 85], 12], [[0, 0], 15]]
+radix_sort(test,2)
+print(test)
 '''lis_test= listest.listest()
 t0= time.perf_counter()
 radix_sort(lis_test,3)
