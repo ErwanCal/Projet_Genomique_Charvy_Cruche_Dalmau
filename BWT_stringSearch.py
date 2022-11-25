@@ -1,6 +1,6 @@
 import DC3
 
-def BWT(T):
+def BWT(text,suffix_table):
     """
     Compute the BWT from the suffix table
 
@@ -12,52 +12,32 @@ def BWT(T):
         bwt (str): BWT
     """
     bwt = ""
-    text= T ##+ "$"
-    sf_tab = DC3.DC3(text)
+    sf_tab = suffix_table
     for i in range(len(sf_tab)):
         crt = sf_tab[i]
         bwt += text[crt-1]
     ###################
     # Write your code
     ###################
-    return(bwt,sf_tab)
+    return(bwt)
 
-def pattern_matching_BWT(S,pattern):
+def pattern_matching_BWT(S,pattern,bwt,index,somme):
     """
     Search a pattern in a String using the BWT
 
     Args:
         S (str): string
         pattern (str): pattern
+        bwt : the bwt of the text (to not compute it each time)
 
     Return:
         bool: true if the pattern is in the string
+        int : position of the first occurence of the pattern in the ordered text
+        int : position of the last occurence of the pattern in the ordered text
     """
-    S = S+ "$"
     pattern_in_S = False
-    Lb,sf_tab = BWT(S)
-    L = list(Lb)
+    L = list(bwt)
     lpattern = list(pattern)
-    ##initialisation de l'alphabet, de l'index et du compteur total de char
-    alphabet = []
-    for i in range(len(L)):
-        if L[i] not in alphabet:
-            alphabet.append(L[i])
-    alphabet.sort()
-    total = []
-    index = L+[]
-    for lett in alphabet:
-        cntr = 0
-        for i in range(len(L)):
-            if L[i]==lett:
-                cntr +=1
-                index[i]=(lett,cntr)
-        total.append((lett,cntr))##le faire en une liste somme et total
-    somme = []
-    som=0
-    for tpl in total:
-        som += tpl[1]
-        somme.append((tpl[0],som))
     start_string = -1
     end_string = -1
     ##init des valeurs utiles pour la substring search
@@ -83,8 +63,6 @@ def pattern_matching_BWT(S,pattern):
         for u in range(r,s+1):
             if(suite_impos==False):##we use the boolean to exit the loop early
                 break
-            ##print(Y)
-            ##print(L[u], Y)
             if L[u]==Y:
                 suite_impos= False
                 prev = 0
@@ -115,9 +93,6 @@ def pattern_matching_BWT(S,pattern):
         i = 0
         pattern_in_S = False
         return pattern_in_S,start_string,end_string
-    print(e,f)
-    print(Y)
-    print(i)
     ##dans le cas où e = f, il faut vérifier que le reste du substring est bon
     if i > 0 :
         while i > 0 :
@@ -136,10 +111,9 @@ def pattern_matching_BWT(S,pattern):
     if i < 1 :
         pattern_in_S = True
 
-    ##print("start ",start_string," end ",end_string)
     return pattern_in_S,start_string,end_string
 
-def string_location(text,string):
+def string_location(text,string,matches,suffix_table):
     '''
     Gives the position of each occurence of the substring in the text
 
@@ -150,31 +124,54 @@ def string_location(text,string):
     Return :
         ???
     '''
-    result = pattern_matching_BWT(text,string)
-    sft = DC3.DC3(text)##a faire en dehors (ou dans la string search pour ne pas recalculer le tout)
+    result = matches
+    sft = suffix_table
     list_occur = []
     if result[0] == False :
         print("No occurence of the substring was found")
         list_occur.append(-1)
     else :
         for i in range(result[1],(result[2]+1)):
-            ##print("i ",i)
-            id = sft[i-1]-1 ##id = 66 pour bon result
-            ##print(sft)
-            ##print(id)
+            id = sft[i-1]-1
             list_occur.append(id)
             print(T[id:id+len(string)])
     return(list_occur)
 
+def k_positioning(text,pattern,bwt,suffix_table):##permet d'obtenir la liste des positions
+    ##initialisation de l'alphabet, de l'index et du compteur total de char
+    L = list(bwt)
+    alphabet = ['$','A','C','G','T']
+    total = []
+    index = L+[]
+    for lett in alphabet:
+        cntr = 0
+        for i in range(len(L)):
+            if L[i]==lett:
+                cntr +=1
+                index[i]=(lett,cntr)
+        total.append((lett,cntr))##le faire en une liste somme et total
+    somme = []
+    som=0
+    for tpl in total:
+        som += tpl[1]
+        somme.append((tpl[0],som))
+    ##recuperation des positions des premiers et derniers patterns trouvés
+    mat = pattern_matching_BWT(T,patt,bwt,index,somme)
+    ##recupération et renvoi des positions de tout les patterns
+    return string_location(T,patt,mat,sft)
 
-T2 = "TTTCCAATTAATTATCAAGTCTGTTTTCCAATACTAGCTGCATCGATCGTAAGCATCAAGTCTGTTTTGGGTTTCCAATTAATTATCAAGTTTCCAATTAATTATCAAGTCTGTTTTGGGTTTCCAATTAATTATCAAGTCTGTTTTGGGACTCTGCATCTGTTTTGGGACTCTGCATTTGGGTTTCCAATTAATTATCAAGTCTGTTTTGGGACTCTGCA"
-T = "TTTCCAATTAATTATCAAGTCTGTTTTGGGTTTCCAATTAATTATCACCAGTCGTATTTTGGGACTCTGCACCTAATCCCCAACACTTTGTCGTAGAAACACTTTGAG"
-patt3 = "ATCAA"
+T = "TTTCCAATTAATTATCAAGTCTGTTTTCCAATACTAGCTGCATCGATCGTAAGCATCAAGTCTGTTTTGGGTTTCCAATTAATTATCAAGTTTCCAATTAATTATCAAGTCTGTTTTGGGTTTCCAATTAATTATCAAGTCTGTTTTGGGACTCTGCATCTGTTTTGGGACTCTGCATTTGGGTTTCCAATTAATTATCAAGTCTGTTTTGGGACTCTGCA"
+T2 = "TTTCCAATTAATTATCAAGTCTGTTTTGGGTTTCCAATTAATTATCACCAGTCGTATTTTGGGACTCTGCACCTAATCCCCAACACTTTGTCGTAGAAACACTTTGAG"
+patt = "ATCAA"
 patt5 = "AGTCGTA"
 patt4 = "AGTCGT"
-patt = "TGCACC"
+patt2 = "TGCACC"
+text= T + '$'
+sf_tab = DC3.DC3(text)
 print(len(T))
-string_location(T,patt)
+sft=DC3.DC3(T)
+bwt = BWT(text,sf_tab)
+print(k_positioning(text,patt,bwt,sf_tab))
 
 ##print(BWT(T))
 ##le dollar permet d'eviter pattern sur fin/debut (chevauchement)
