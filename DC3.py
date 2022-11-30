@@ -14,16 +14,16 @@ def DC3(S, P_12_base = []) :
         order_12 : order of the next recursion to map correctly recursivity
     """
     
-    DC3_table = np.zeros((3,len(S) + 3), dtype=int) # Les caractères sentinelles sont déja là !
+    DC3_table = np.zeros((3,len(S) + 3), dtype=int) # On crée un tableau de taille longeur de la séquence + 3 caractères sentinelles
     """
     Table de DC3 qui contient en chaque ligne : 
-    Ligne 0 : indice du caractère
+    Ligne 0 : indice du caractère ( ducoup optionel si on veut )
     Ligne 1 : conversion du caractère en nombre
     Ligne 2 : Ordre de l'indice du caractère
     
     """
     for i in range(len(S) + 3) :
-            DC3_table[0][i] =  i # On remplace le caractère par son code Ascii
+            DC3_table[0][i] =  i # On initialise les indices
     
     #print(DC3_table)
     
@@ -68,11 +68,11 @@ def DC3(S, P_12_base = []) :
     for val in P_12 :
         R_12.append([list(DC3_table[1][val:val+3]), val])
 
-    #print(R_12)
+    print(R_12)
     
     rd.radix_sort(R_12,3) # On trie les triplets
     
-    #print(R_12)
+    print(R_12)
     
     index_12 = [] # Liste des indexes de R12 trié
     order_count = 1 # Compteur pour remplir l'ordre
@@ -101,17 +101,17 @@ def DC3(S, P_12_base = []) :
             DC3_table[2][ind] = val
             index_12.append(ind)
             
-        #print(DC3_table)
+        print(DC3_table)
     
     R_0 = [] # On crée la dernière partie à trier
     for val in P0 :
         R_0.append([[int(DC3_table[1][val]), DC3_table[2][val + 1]], val]) # On crée R0 avec son indice
         
-    #print(R_0)
+    print(R_0)
     
     rd.radix_sort(R_0,2)
     
-    #print(R_0)
+    print(R_0)
     
     index_0 = [] # Liste des indexes de R0 trié
     for k in range(len(R_0)) : # On parcours tous les doublets triés
@@ -122,17 +122,57 @@ def DC3(S, P_12_base = []) :
     index_012 = [] # On crée l'index final en ordonant 0 et 1,2
     i_0 = 0
     i_12 = 0
-    while (i_0 < len(index_0) or i_12 < len(index_12)) : # On prends tout les éléments : on vide index 0 et 12
-        if i_0 == len(index_0) : # Cas où index 0 est vide, on rempli avec index 12
+    
+    index_12_dict = {}
+    for i in range(len(index_12)) :
+        index_12_dict[index_12[i]] = i
+        
+    while (i_0 < len(index_0) and i_12 < len(index_12)) : # On prends tout les éléments : on vide index 0 ou 12
+        val_i0 = index_0[i_0]
+        val_i12 = index_12[i_12]
+        
+        if DC3_table[1][val_i0] > DC3_table[1][val_i12] : # Cas où index 12 arrive avant index 0
             index_012.append(index_12[i_12])
             i_12 += 1
-        elif i_12 == len(index_12) : # Cas où index 12 est vide, on rempli avec index 0
+        elif DC3_table[1][val_i0] < DC3_table[1][val_i12] : # Cas où index 0 arrive avant index 12
             index_012.append(index_0[i_0])
             i_0 += 1
-        elif int(DC3_table[1][index_0[i_0]]) > int(DC3_table[1][index_12[i_12]]) : # Cas où index 12 arrive avant index 0
+        else : # Cas d'égalité sur l'indice : si les 2 indexes renvoient le même nombre 
+            if index_12[i_12] % 3 == 1 :
+                if index_12_dict[val_i0 + 1] > index_12_dict[val_i12 + 1] : # Cas où index 12 au deuxième terme arrive avant index 0 au deuxième terme
+                    index_012.append(index_12[i_12])
+                    i_12 += 1
+                else : # Cas où index 0 au deuxième terme arrive avant index 12 au deuxième terme
+                    index_012.append(index_0[i_0])
+                    i_0 += 1
+            else :
+                if DC3_table[1][val_i0 + 1] > DC3_table[1][val_i12 + 1] : # On teste dabord cas où index 12 + 1 arrive avant index 0 + 1
+                    index_012.append(index_12[i_12])
+                    i_12 += 1
+                elif DC3_table[1][val_i0 + 1] < DC3_table[1][val_i12 + 1] : # Cas où index 0 + 1 arrive avant index 12 + 1
+                    index_012.append(index_0[i_0])
+                    i_0 += 1
+                elif index_12_dict[val_i0 + 2] > index_12_dict[val_i12 + 2] : # Cas où index 12 au deuxième terme arrive avant index 0 au troisième terme
+                    index_012.append(index_12[i_12])
+                    i_12 += 1
+                else : # Cas où index 0 au troisième terme arrive avant index 12 au deuxième terme
+                    index_012.append(index_0[i_0])
+                    i_0 += 1
+    
+    index_012.extend(index_12[i_12:]) # Si 1 des deux index est encore plein, on ajoute son contenu
+    index_012.extend(index_0[i_0:])
+    """
+    while (i_0 < len(index_0) or i_12 < len(index_12)) : # On prends tout les éléments : on vide index 0 et 12
+        if i_0 == len(index_0) : # Cas où index 0 est vide, on rempli avec index 12
+            index_012.extend(index_12[i_12:])
+            i_12 += len(index_12)
+        elif i_12 == len(index_12) : # Cas où index 12 est vide, on rempli avec index 0
+            index_012.extend(index_0[i_0:])
+            i_0 += len(index_0)
+        elif DC3_table[1][index_0[i_0]] > DC3_table[1][index_12[i_12]] : # Cas où index 12 arrive avant index 0
             index_012.append(index_12[i_12])
             i_12 += 1
-        elif int(DC3_table[1][index_0[i_0]]) < int(DC3_table[1][index_12[i_12]]) : # Cas où index 0 arrive avant index 12
+        elif DC3_table[1][index_0[i_0]] < DC3_table[1][index_12[i_12]] : # Cas où index 0 arrive avant index 12
             index_012.append(index_0[i_0])
             i_0 += 1
         else : # Cas d'égalité sur l'indice : si les 2 indexes renvoient le même nombre 
@@ -144,10 +184,10 @@ def DC3(S, P_12_base = []) :
                     index_012.append(index_0[i_0])
                     i_0 += 1
             else :
-                if int(DC3_table[1][index_0[i_0] + 1]) > int(DC3_table[1][index_12[i_12] + 1]) : # On teste dabord cas où index 12 + 1 arrive avant index 0 + 1
+                if DC3_table[1][index_0[i_0] + 1] > DC3_table[1][index_12[i_12] + 1] : # On teste dabord cas où index 12 + 1 arrive avant index 0 + 1
                     index_012.append(index_12[i_12])
                     i_12 += 1
-                elif int(DC3_table[1][index_0[i_0] + 1]) < int(DC3_table[1][index_12[i_12] + 1]) : # Cas où index 0 + 1 arrive avant index 12 + 1
+                elif DC3_table[1][index_0[i_0] + 1] < DC3_table[1][index_12[i_12] + 1] : # Cas où index 0 + 1 arrive avant index 12 + 1
                     index_012.append(index_0[i_0])
                     i_0 += 1
                 elif index_12.index(index_0[i_0] + 2) > index_12.index(index_12[i_12] + 2) : # Cas où index 12 au deuxième terme arrive avant index 0 au troisième terme
@@ -157,8 +197,8 @@ def DC3(S, P_12_base = []) :
                 else : # Cas où index 0 au troisième terme arrive avant index 12 au deuxième terme
                     index_012.append(index_0[i_0])
                     i_0 += 1
-    
     #print(index_012)
+    """
     
     if int(DC3_table[1][index_012[0]]) == 0 : # On enlève le terme sentinel s'il est présent
         index_012 = index_012[1:]
@@ -175,5 +215,6 @@ def DC3(S, P_12_base = []) :
     
 
     return index_012 # Retourne le suffix array si dernière récursion
+
 
 print(DC3("abcabcacab"))
