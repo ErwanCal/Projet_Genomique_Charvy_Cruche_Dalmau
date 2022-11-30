@@ -6,7 +6,7 @@ def link_reads (l_pos_kmer,k):
         l_pos_kmer : list of tuple : (kmer, position in the genom)
         k : length of kmers
     Return:
-        ?
+        A list of kmer and their position
     """
 
     l_pos_kmer.sort(key=lambda x: x[1]) #sort by position
@@ -30,10 +30,14 @@ def link_reads (l_pos_kmer,k):
         if((tuple_pos+1)==(len(l_pos_kmer))):
             break
 
-# un do while serait préférable ??
     return(list_reads_pos)
 
-tab_pos=[('TT',1),('AT',13),('CC',3),('CA',15),('AA',5),('AG',17),('TT',7)]
+
+# attention voir fin reads
+#vérifier que bon reads finaux
+# ajouter position de fin
+
+tab_pos=[('TT',1),('AT',13),('CC',3),('CA',15),('AA',5),('AG',17),('T',7)]
 
 print(link_reads(tab_pos,2))
 
