@@ -1,54 +1,38 @@
 
-def link_reads (l_pos_kmer,k):
+def link_reads (l_pos,k):
     """
     Links the kmer of the reads
     Args:
-        l_pos_kmer : list of tuple : (kmer, position in the genom)
+        l_pos : list of tuple : (kmer_pos_read, kmer_pos_gen)
+        kmer_pos_read : position of the kmer in the read
+        kmer_pos_gen : possible position of the kmer in the genom
         k : length of kmers
     Return:
-        A list of kmer and their position
+
     """
+    valid=False # true if there is a valid position
+    val_pos=[] # list of valid starting position of the read in the genom
+    for i in l_pos[0][1] :# for each first position,we add the next part to see if it exists
+        cur_pos=1
+        if(cur_pos==len(l_pos)): # if there is only one position in the list
+            if (i!=-1): #if there is only a position -1 it returns False and no position
+                valid=True
+                val_pos.append(i)
 
-    l_pos_kmer.sort(key=lambda x: x[1]) #sort by position
+        else :  # if there is more than 1 element iiin the list
+            pos_gen=i+k # next position of the kmer of the read in the genom
+            while (pos_gen in l_pos[cur_pos][1]) : # we try to find the next kmer in the next list of position of kmer
+                cur_pos+=1
+                if(cur_pos==len(l_pos)): # when there is the whole read in the genom
+                    valid=True
+                    val_pos.append(i)# to return the position of the read(s) in the genom
+                    break
+                else :
+                    pos_gen+=k
+    return (valid, val_pos)
 
-    list_reads_pos=[]
+read=[(1,[4,9,10]),(2,[6,15,28,57])]
+read2=[(1,[-1])]
+print(link_reads(read2,4))
 
-    tuple_pos=0
-    while ((tuple_pos+1)<len(l_pos_kmer)) : # while we have not seen each tuple of the list
-        word=l_pos_kmer[tuple_pos][0] # add the kmer to the word we want to add
-        pos_word=l_pos_kmer[tuple_pos][1] # take the position of the word
-        next_pos=l_pos_kmer[tuple_pos][1]+k  #position of the next kmer
-        tuple_pos+=1
-        while (next_pos==l_pos_kmer[tuple_pos][1])  :
-            word+=l_pos_kmer[tuple_pos][0]
-            next_pos=l_pos_kmer[tuple_pos][1]+k
-            tuple_pos+=1
-            if((tuple_pos+1)==(len(l_pos_kmer))): #case in which the next element is the last longueur
-                word+=l_pos_kmer[tuple_pos][0]
-                break
-        list_reads_pos.append((word,pos_word))
-        if((tuple_pos+1)==(len(l_pos_kmer))):
-            break
-
-    return(list_reads_pos)
-
-
-# attention voir fin reads
-#vérifier que bon reads finaux
-# ajouter position de fin
-
-tab_pos=[('TT',1),('AT',13),('CC',3),('CA',15),('AA',5),('AG',17),('T',7)]
-
-print(link_reads(tab_pos,2))
-
-
-### Attention pour l'instant je suppose que chaque kmer a la même longueur (bout de chaine à voir) et qu'il n'y a pas plusieurs kmer
-## à la même position
-
-#test
-T = "TTTCCAATTAATTATCAAGTCTGTTTTGGGTTTCCAATTAATTATCACCAGTCTGTTTTGGGACTCTGCACCTAATCCCCAACACTTTGAGAAACACTTTGAG"
-
-
-
-# reads 1 : TT CC AA TT
-# reads 2 :  AT CA AG
+    # attention traiter cas -1, et cas avec un seul tuple dans liste et attention position pas dans bon ordre
