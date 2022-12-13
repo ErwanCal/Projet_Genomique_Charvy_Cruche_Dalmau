@@ -1,0 +1,29 @@
+Efficacité du programme : (annotation manuelle)
+
+
+Pour Chromosome 1, sur l'échantillon aléatoire du fichier vect_ale_chr.txt :
+Total = 1000
+Nb de positions non mappées = 
+Nb de positions mal mappées =
+Nb de positions correctement mappées = 
+Nb de positions incertaines = 
+
+Pourcentage attendu sur le chromosome :
+% positions non mappées = 
+% positions mal mappées =
+% positions correctement mappées = 
+% positions incertaines = 
+
+
+Pour le génome, sur l'échantillon aléatoire du fichier vect_ale_gen.txt :
+Total = 100 * 15 = 1500
+Nb de positions non mappées = 
+Nb de positions mal mappées =
+Nb de positions correctement mappées = 
+Nb de positions incertaines = 
+
+Pourcentage attendu sur le chromosome :
+% positions non mappées = 
+% positions mal mappées =
+% positions correctement mappées = 
+% positions incertaines = 
