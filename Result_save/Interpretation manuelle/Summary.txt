@@ -2,21 +2,22 @@ Efficacité du programme : (annotation manuelle)
 
 
 Pour Chromosome 1, sur l'échantillon aléatoire du fichier vect_ale_chr.txt :
-Total = 1000
-Nb de positions non mappées = 
-Nb de positions mal mappées =
-Nb de positions correctement mappées = 
-Nb de positions incertaines = 
+Total = 1000 / "147"
+Nb de positions non mappées = 19
+Nb de positions mal mappées = 1
+Nb de positions correctement mappées = 121, dont 66 sans mutations
+Nb de positions incertaines = 6
 
 Pourcentage attendu sur le chromosome :
-% positions non mappées = 
-% positions mal mappées =
-% positions correctement mappées = 
-% positions incertaines = 
+% positions non mappées = 12,9%
+% positions mal mappées = 0,6%
+% positions correctement mappées = 82,3%, dont 54,5% sans mutation
+% positions incertaines = 4,1%
 
 (Comme c'est plus facile à chercher : on sait que positions non mappées dans le chromosome = 
-donc % positions non mappées réel = 
-le pourcentage estimé est donc  par rapport à la réalité, on s'attend que ...)
+donc % positions non mappées réel = 10351 sur 80000
+le pourcentage estimé est donc de 12,9% par rapport à la réalité, donc l'échantillon semble représentatif)
+
 
 Pour le génome, sur l'échantillon aléatoire du fichier vect_ale_gen.txt :
 Total = 100 * 15 = 1500
