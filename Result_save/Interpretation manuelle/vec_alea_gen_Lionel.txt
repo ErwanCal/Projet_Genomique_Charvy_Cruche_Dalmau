@@ -1,0 +1,96 @@
+Chromosome 7 :
+Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
+1457			Y		C			P	
+1005			Y		C			P
+2876			Y		C			P
+8382			Y		C			M
+9922			Y		C			M
+4203			Y		C			P
+391			Y		C			M
+2997			Y		C			M
+7655			Y		C			P
+4273			Y		C			P
+Chromosome 8 :
+Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
+9033	
+5577	
+7852	
+4353	
+8483	
+2941	
+1141	
+2619	
+1649	
+4021	
+Chromosome 9 :
+Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
+5024	
+5065	
+1332	
+1135	
+8181	
+9949	
+6719	
+56	
+7331	
+72	
+Chromosome 10 :
+Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
+7289	
+8245	
+2041	
+5503	
+7042	
+6627	
+971	
+2517	
+5023	
+5960	
+Chromosome 11 :
+Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
+9846	
+2762	
+3175	
+8998	
+8785	
+3393	
+8414	
+5256	
+1296	
+5318	
+Chromosome 12 :
+Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
+4868	
+546	
+1790	
+3868	
+3883	
+1976	
+8983	
+9524	
+5175	
+5603	
+Chromosome 13 :
+Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
+7706	
+4517	
+5068	
+8268	
+5073	
+6639	
+5420	
+610	
+1530	
+7764	
+Chromosome 14 :
+Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
+3709	
+9585	
+2588	
+9812	
+2896	
+1860	
+2169	
+910	
+6219	
+413	
