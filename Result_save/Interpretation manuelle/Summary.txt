@@ -15,8 +15,8 @@ Pourcentage attendu sur le chromosome :
 % positions incertaines = 4,1%
 
 (Comme c'est plus facile à chercher : on sait que positions non mappées dans le chromosome = 
-donc % positions non mappées réel = 10351 sur 80000
-le pourcentage estimé est donc de 12,9% par rapport à la réalité, donc l'échantillon semble représentatif)
+donc % positions non mappées réel = 13016 sur 100000
+le pourcentage estimé est donc de 13,0% par rapport à la réalité, donc l'échantillon semble représentatif)
 
 
 Pour le génome, sur l'échantillon aléatoire du fichier vect_ale_gen.txt :
