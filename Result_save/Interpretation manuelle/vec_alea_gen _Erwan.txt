@@ -1,0 +1,84 @@
+Chromosome 0 : NC_004325.2
+Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)	
+4608	
+8368	
+6550	
+3171	
+5781	
+4120	
+8687	
+6452	
+6300	
+7007	
+Chromosome 1 : NC_037280.1
+Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
+1479	
+5505	
+1166	
+5254	
+5897	
+822	
+7271	
+7032	
+161	
+8969	
+Chromosome 2 : NC_000521.4
+Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
+4399	
+6113	
+4605	
+9447	
+6086	
+2020	
+7020	
+3287	
+9246	
+8717	
+Chromosome 3 :
+Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
+4989	
+3018	
+575	
+6264	
+6013	
+3208	
+9249	
+548	
+5264	
+5859	
+Chromosome 4 :
+Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
+9929	
+6207	
+1177	
+4798	
+8783	
+819	
+4511	
+4141	
+4212	
+2486	
+Chromosome 5 :
+Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
+5297	
+6599	
+1754	
+203	
+1599	
+8712	
+3944	
+4818	
+9770	
+7243	
+Chromosome 6 :
+Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
+583	
+9416	
+4035	
+6267	
+7668	
+9867	
+504	
+9696	
+3345	
+9903	
