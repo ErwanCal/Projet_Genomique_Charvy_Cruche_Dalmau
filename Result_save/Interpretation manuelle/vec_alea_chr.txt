@@ -1,6 +1,6 @@
 Numero read	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)	
 58503		Y		C			P					
-10862							
+10862		Y 	C			P	
 29275		Y		C			P					
 96085		Y		C			M					
 43566		Y		I								
@@ -11,7 +11,7 @@ Numero read	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
 47641		Y		C			M
 99367		Y		C			P
 59108		Y		C			M
-15323		
+15323		Y   I
 24385		Y		C			M
 97280		N
 42978		Y		C			M
@@ -21,25 +21,25 @@ Numero read	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
 44746		Y		C			P
 43675		Y		C			P
 47948		Y		C			M
-7917		
+7917		Y   I 
 24217		Y		C			M
-3969		
-6019		
+3969		Y   I
+6019		Y   I
 21254		Y		C			M
 45174		Y		C			M
 27538		Y		C			P
-1908		
+1908		Y   I
 42166		Y		C			M
-10732		
-9996		
+10732		Y   I
+9996		Y   I 
 53134		Y		C			P
 20348		Y		C			P
 54077		Y		C			M
-14704		
+14704		Y   I
 96250		Y		C			PM(parfait multiple)
 21702		N
 20708		Y		C			P
-5072		
+5072		Y   I
 93548		Y		C			M
 57618		Y		C			M
 44601		Y		C			P
@@ -52,11 +52,11 @@ Numero read	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
 41717		N
 29074		N
 50690		Y		C			M
-19690		
+19690		N   I
 59231		Y		C			P
 24309		Y		C			P
-9980		
-14646		
+9980		N
+14646		Y   I
 93049		Y		C			P
 20972		Y		C			P
 26908		N
@@ -74,7 +74,7 @@ Numero read	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
 59720		Y		C			P
 26665		Y		C			M
 50982		Y		C			MM
-14106		
+14106		Y   I
 95171		Y		C			P
 57546		Y		C			MM
 21869		Y		C			M
@@ -82,14 +82,14 @@ Numero read	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
 98314		Y		C			M
 45510		N
 21598		Y		C			M
-9802		
+9802		Y   I
 58839		Y		C			M
 45499		Y		C			M
 59799		Y		C			P
 57118		Y		C			P
 51854		Y		C			P
 54083		N
-7645		
+7645		Y   I
 29036		Y		C			MM
 50410		Y		C			M
 53357		Y		C			M
