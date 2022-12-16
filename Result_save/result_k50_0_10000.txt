@@ -1,4 +1,4 @@
-Name_seq		Find ?	Where : n° chromosome brin : start
+Name_seq		Find ?	Where : nÂ° chromosome brin : start
 NC_004325.2-100000	False
 NC_004325.2-99999	False
 NC_004325.2-99998	True	1 + : 471738	
