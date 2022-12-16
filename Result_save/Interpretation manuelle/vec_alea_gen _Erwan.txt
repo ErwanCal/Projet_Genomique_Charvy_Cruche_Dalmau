@@ -1,84 +1,84 @@
-Chromosome 0 : NC_004325.2
+Chromosome 0 : NC_004325.2 70000 80000
 Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)	
-4608	
-8368	
-6550	
-3171	
-5781	
-4120	
-8687	
-6452	
-6300	
-7007	
+4608				Y			C			M
+8368				Y			C			P
+6550				Y			C			M
+3171				Y			C			P	
+5781				Y			C			P
+4120				N
+8687				Y			C			M
+6452				Y			C			M
+6300				Y			C			P
+7007				Y			C			MM (chromosome 0 et 12)
 Chromosome 1 : NC_037280.1
 Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
-1479	
-5505	
-1166	
-5254	
-5897	
-822	
-7271	
-7032	
-161	
-8969	
+1479				Y			C			P
+5505				Y			C			P
+1166				Y			C			P
+5254				Y			C			P
+5897				Y			C			MM (un seul sur le bon chromosome)
+822				Y			C			M
+7271				Y			C			P
+7032				N
+161				Y			C			P
+8969				Y			C			M
 Chromosome 2 : NC_000521.4
 Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
-4399	
-6113	
-4605	
-9447	
-6086	
-2020	
-7020	
-3287	
-9246	
-8717	
+4399				N
+6113				Y			C			P
+4605				Y			C			P
+9447				Y			C			P
+6086				Y			C			P
+2020				Y			C			P
+7020				Y			C			P
+3287				Y			C			M
+9246				Y			C			MM
+8717				Y			C			P
 Chromosome 3 :
 Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
-4989	
-3018	
-575	
-6264	
-6013	
-3208	
-9249	
-548	
-5264	
-5859	
+4989				N							
+3018				Y			C			MM
+575				Y			C			MM
+6264				Y			C			M
+6013				Y			C 			P
+3208				Y			C			M
+9249				Y			C			MM
+548				N	
+5264				Y			C			P (avec autres positions mutées trouvées) 
+5859				Y			I			M (aucune position trouvée sur le chromosome 3)
 Chromosome 4 :
 Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
-9929	
-6207	
-1177	
-4798	
-8783	
-819	
-4511	
-4141	
-4212	
-2486	
+9929				Y			C			P
+6207				Y			C			M
+1177				Y			C			P
+4798				Y			C			M
+8783				Y			C			P
+819				Y			C			M
+4511				Y			C			M
+4141				N
+4212				N
+2486				Y			C			P
 Chromosome 5 :
 Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
-5297	
-6599	
-1754	
-203	
-1599	
-8712	
-3944	
-4818	
-9770	
-7243	
+5297				Y			C			P
+6599				Y			C			P
+1754				Y			C			P
+203				Y			C			M
+1599				Y			C			P
+8712				N						
+3944				Y			C			M
+4818				Y			C			M
+9770				Y			C			M
+7243				Y			C			P
 Chromosome 6 :
 Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
-583	
-9416	
-4035	
-6267	
-7668	
-9867	
-504	
-9696	
-3345	
-9903	
+583				Y			C			M
+9416				Y			C			M
+4035				Y			C			P
+6267				Y			C			P
+7668				Y			C			P
+9867				Y			C			M
+504				Y			C			P
+9696				Y			C			MM (sur le chromosome 6 et 3)
+3345				Y			C			P
+9903				Y			C			M
