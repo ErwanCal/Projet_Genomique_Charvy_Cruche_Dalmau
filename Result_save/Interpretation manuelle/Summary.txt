@@ -1,5 +1,15 @@
 Efficacité du programme : (annotation manuelle)
 
+1) Efficacité du mapping sur entre les différents k :
+On a pour les 10000 premiers reads :
+Nb de positions non mappées pour k = 10 :  1294 (12,9%)
+Nb de positions non mappées pour k = 25 :  
+Nb de positions non mappées pour k = 50 :  5258 (52,6%)
+
+Comme on pouvait s'en douter diminuer, augmenter k va diminuer la précision c'est pourquoi nous avons choisi de garder k = 10 pour la majorité de nos fichiers résultats
+
+2) Efficacité du mapping sur k = 10
+
 Pour Chromosome 1, sur l'échantillon aléatoire du fichier vect_ale_chr.txt :
 Total = 200
 Nb de positions non mappées = 29
