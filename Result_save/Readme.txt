@@ -6,6 +6,7 @@ Nous avons mappés tout les reads du chromosome 1 (1 a 100 000), qui sont égale
 Pour les chromosomes suivants, nous avons uniquement mappés 10 000 reads de chaque chromosome, par manque de temps.
 
 Afin d'avoir une estimation de la qualité de notre mapping, nous avons réalisé une comparaison manuelle de certains reads tirés aléatoirement.
+Ils ont été comparés au résultats contenus dans le fichier BAM (converti en SAM sur Galaxy).
 Nous avons 250 reads tirés dans le chromosome 1 uniquement, et 10 reads tirés sur chaque chromosome .
 (parmis les 10 000 reads mappés sur les chromosomes 2 à 15, et également 10 reads supplémentaires sur le chromosome 1)
 
