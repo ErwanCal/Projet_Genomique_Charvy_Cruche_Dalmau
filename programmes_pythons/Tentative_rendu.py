@@ -1,17 +1,17 @@
 from Bio import SeqIO # Permet l'import de la fonction parse
-from Bio.Seq import Seq # Permet la transformation en complémentaire inverse
-from Bio.SeqIO.QualityIO import FastqGeneralIterator # Permet un parse plus rapide lorsque beaucoup de séquences (fastaq uniquement sinon voir site biopython pour fasta)
+from Bio.Seq import Seq # Permet la transformation en compl矇mentaire inverse
+from Bio.SeqIO.QualityIO import FastqGeneralIterator # Permet un parse plus rapide lorsque beaucoup de s矇quences (fastaq uniquement sinon voir site biopython pour fasta)
 import functools as ft # Permet de regrouper des listes pour radix sort
-from collections import Counter # Demander à Erwan
+from collections import Counter # Demander � Erwan
 import numpy as np
 
-from tqdm import tqdm # Permet d'estimer le temps d'éxécution sur un boucle
+from tqdm import tqdm # Permet d'estimer le temps d'矇x矇cution sur un boucle
 from datetime import datetime # Permet de comparer la vitesse de 2 programmes 
 #%load_ext snakeviz # temps de calcul
 
 def import_DC3(filename) :
     """
-    Fonction qui importe depuis un fichier texte la table des suffixes du génome par DC3 et la stocke dans une liste
+    Fonction qui importe depuis un fichier texte la table des suffixes du g矇nome par DC3 et la stocke dans une liste
     """
     filename = "DC3_save/" + filename
     with open(filename, 'r') as f:
@@ -23,46 +23,46 @@ def import_DC3(filename) :
 
 def genome_import() :
     """
-    Fonction qui importe depuis un fichier fasta la séquence du génome dans une liste contenant ["seq", "n°k"]
+    Fonction qui importe depuis un fichier fasta la s矇quence du g矇nome dans une liste contenant ["seq", "n簞k"]
     """
     list_genom=[]
     for record in SeqIO.parse("GCF_000002765.5_GCA_000002765_genomic.fna","fasta"):
-        list_genom.append([str(record.seq).upper(),record.description[-14:]]) # attention le marquage est à changer pour la dernière séquence
+        list_genom.append([str(record.seq).upper(),record.description[-14:]]) # attention le marquage est � changer pour la derni癡re s矇quence
     
     return list_genom
     
 def reads_import_cuts(k) :
     """
-    Fonction qui importe depuis un fichier fasta les séquences des reads et les coupes en les rangeant
-    dans une liste contenant ["seq", "nom", "n°kmer"]
+    Fonction qui importe depuis un fichier fasta les s矇quences des reads et les coupes en les rangeant
+    dans une liste contenant ["seq", "nom", "n簞kmer"]
     
-    Entrée : k, int : longueur du kmer
+    Entr矇e : k, int : longueur du kmer
     
-    Sortie : list_reads : liste de tous les read découpés en kmers
+    Sortie : list_reads : liste de tous les read d矇coup矇s en kmers
     """
     list_reads=[]
     with open("single_Pfal_dat.fq") as in_handle:
         for title, seq, qual in tqdm(FastqGeneralIterator(in_handle), desc = "Import sequence"):
-            i = 1    # Incrémenteur du nombre de k-mer
-            while len(seq) >= 1 : # On parcoure toute la séquence
-                if len(seq) > k : # Cas où le k-mer est entier
+            i = 1    # Incr矇menteur du nombre de k-mer
+            while len(seq) >= 1 : # On parcoure toute la s矇quence
+                if len(seq) > k : # Cas o羅 le k-mer est entier
                     list_reads.append([str(seq[0:k]).upper(),title, i])
                     i += 1
                     seq = seq[k:]
-                else : # Cas où le dernier k-mer n'est pas entier
+                else : # Cas o羅 le dernier k-mer n'est pas entier
                     list_reads.append([str(seq).upper(),title, i])
                     seq = ""
             
     return list_reads
 def flatten(arr):
     """
-    Nécessaire pour le radix sort, je te le laisse Erwan
+    N矇cessaire pour le radix sort, je te le laisse Erwan
     """
     return ft.reduce(lambda x, y: x + y, arr)
 
 def counting_sort(array,digit,p): 
     """
-    Nécessaire pour le radix sort, je te le laisse Erwan
+    N矇cessaire pour le radix sort, je te le laisse Erwan
     """
     ##The counting sort is a stable sort used in the radic sort
     ##here the counting sort needs to be adapted to look at only one digit of each number (for radix)
@@ -82,13 +82,13 @@ def counting_sort(array,digit,p):
         
 def radix_sort(array,p):
     """
-    Prend en entrée un tableau de valeur de valeur et le trie en foncion de la première composante
+    Prend en entr矇e un tableau de valeur de valeur et le trie en foncion de la premi癡re composante
     selon l'algorithm du radix sort
     
-    Entrée : array à trier
-             p : nombre de cases à trier p-uplets
+    Entr矇e : array � trier
+             p : nombre de cases � trier p-uplets
     
-    Sortie : array trié
+    Sortie : array tri矇
     """
     ##Here the radix sort is modified to work with the triplet list sent by the DC3
     ##The code is not flexible enough to compute all characters in the ascii table, but it's enough for the use needed
@@ -120,38 +120,38 @@ def DC3(S, P_12_base = []) :
         order_12 : order of the next recursion to map correctly recursivity
     """
     
-    DC3_table = np.zeros((3,len(S) + 3), dtype=int) # Les caractères sentinelles sont déja là !
+    DC3_table = np.zeros((3,len(S) + 3), dtype=int) # Les caract癡res sentinelles sont d矇ja l� !
     """
     Table de DC3 qui contient en chaque ligne : 
-    Ligne 0 : indice du caractère
-    Ligne 1 : conversion du caractère en nombre
-    Ligne 2 : Ordre de l'indice du caractère
+    Ligne 0 : indice du caract癡re
+    Ligne 1 : conversion du caract癡re en nombre
+    Ligne 2 : Ordre de l'indice du caract癡re
     
     """
 
     for i in range(len(S) + 3) :
-            DC3_table[0][i] =  i # On remplace le caractère par son code Ascii
+            DC3_table[0][i] =  i # On remplace le caract癡re par son code Ascii
     
-    # String conversion : !!!!! à n'executer que lors de la première récursion !!!!!
+    # String conversion : !!!!! � n'executer que lors de la premi癡re r矇cursion !!!!!
     if type(S) == str :
-        S_l = [*S] # On sépare caractère par caractère : "ATGC" devient ["A","T","G","C"]
+        S_l = [*S] # On s矇pare caract癡re par caract癡re : "ATGC" devient ["A","T","G","C"]
         for i in range(len(S_l)) :
-            DC3_table[1][i] =  ord(S_l[i]) # On rempli le caractère par son code Ascii dans la table
+            DC3_table[1][i] =  ord(S_l[i]) # On rempli le caract癡re par son code Ascii dans la table
     else :
          for i in range(len(S)) :
-            DC3_table[1][i] =  S[i] # Cas où l'on rentre dans la boucle une deuxième fois ou plus, pas de conversion
+            DC3_table[1][i] =  S[i] # Cas o羅 l'on rentre dans la boucle une deuxi癡me fois ou plus, pas de conversion
     """
-    # Cas où la chaine n'est composé que d'une seule lettre : trivial car DC3 = ordre des indices en décroissant
+    # Cas o羅 la chaine n'est compos矇 que d'une seule lettre : trivial car DC3 = ordre des indices en d矇croissant
     equal = True
     for i in range(len(S)) :
         if DC3_table[1][0] != DC3_table[1][i] :
             equal = False
-            break # On teste si la chaine n'est composé que d'une seule lettre
+            break # On teste si la chaine n'est compos矇 que d'une seule lettre
     if equal == True :
          return [*range(len(S)-1,-1,-1)]
     """
     
-    # On crée P0, P1, P2 et P1+P2 :    
+    # On cr矇e P0, P1, P2 et P1+P2 :    
     P0 = [*range(0,len(S)+1,3)] 
     P1 = [*range(1,len(S)+1,3)]
     P2 = [*range(2,len(S)+1,3)]
@@ -159,49 +159,49 @@ def DC3(S, P_12_base = []) :
     P_12 = P1 + P2
     
 
-    #Obtention des triplets à partir de P1+P2 :
+    #Obtention des triplets � partir de P1+P2 :
     R_12 = []
     for val in P_12 :
         R_12.append([list(DC3_table[1][val:val+3]), val])
     
     radix_sort(R_12,3) # On trie les triplets
 
-    index_12 = [] # Liste des indexes de R12 trié
+    index_12 = [] # Liste des indexes de R12 tri矇
     order_count = 1 # Compteur pour remplir l'ordre
-    recur = False # Etat de la récursion tourné True si on a des égalités d'ordre
-    for j in range(len(R_12)) : # On parcours tous les triplets triés
+    recur = False # Etat de la r矇cursion tourn矇 True si on a des 矇galit矇s d'ordre
+    for j in range(len(R_12)) : # On parcours tous les triplets tri矇s
         index_12.append(R_12[j][1]) # ... pour lui attribuer son index depuis P_12
         DC3_table[2][R_12[j][1]] = order_count # Et on ajoute l'ordre dans la table
         if j < len(R_12)-1 :
-            if R_12[j][0] != R_12[j+1][0] : # On teste l'égalité des triplets pour mettre l'ordre
+            if R_12[j][0] != R_12[j+1][0] : # On teste l'矇galit矇 des triplets pour mettre l'ordre
                 order_count += 1
             else :
-                recur = True # On a égalité, donc on doit relancer l'algorithme à la fin des for
+                recur = True # On a 矇galit矇, donc on doit relancer l'algorithme � la fin des for
         else :
             order_count += 1
 
     if recur == True :
-        new_S = [] # On crée T' la séquence des orders suivant l'ordre de P12
+        new_S = [] # On cr矇e T' la s矇quence des orders suivant l'ordre de P12
         for l in P_12 :
             new_S.append(DC3_table[2][l])
-        index_012 = DC3(new_S, P_12) # On doit récupérer ces deux paramètres sinon ça marche pas
+        index_012 = DC3(new_S, P_12) # On doit r矇cup矇rer ces deux param癡tres sinon 癟a marche pas
         index_12 = []
         for ind,val in index_012 :
             DC3_table[2][ind] = val
             index_12.append(ind)
     
-    R_0 = [] # On crée la dernière partie à trier
+    R_0 = [] # On cr矇e la derni癡re partie � trier
     for val in P0 :
-        R_0.append([[int(DC3_table[1][val]), DC3_table[2][val + 1]], val]) # On crée R0 avec son indice
+        R_0.append([[int(DC3_table[1][val]), DC3_table[2][val + 1]], val]) # On cr矇e R0 avec son indice
     
     
     radix_sort(R_0,2)
     
-    index_0 = [] # Liste des indexes de R0 trié
-    for k in range(len(R_0)) : # On parcours tous les doublets triés
-       index_0.append(R_0[k][1]) # On récupère l'indice
+    index_0 = [] # Liste des indexes de R0 tri矇
+    for k in range(len(R_0)) : # On parcours tous les doublets tri矇s
+       index_0.append(R_0[k][1]) # On r矇cup癡re l'indice
     
-    index_012 = [] # On crée l'index final en ordonant 0 et 1,2
+    index_012 = [] # On cr矇e l'index final en ordonant 0 et 1,2
     i_0 = 0
     i_12 = 0
     
@@ -209,42 +209,42 @@ def DC3(S, P_12_base = []) :
     for i in range(len(index_12)) :
         index_12_dict[index_12[i]] = i
     
-    while (i_0 < len(index_0) and i_12 < len(index_12)) : # On prends tout les éléments : on vide index 0 ou 12
+    while (i_0 < len(index_0) and i_12 < len(index_12)) : # On prends tout les 矇l矇ments : on vide index 0 ou 12
         val_i0 = index_0[i_0]
         val_i12 = index_12[i_12]
         
-        if DC3_table[1][val_i0] > DC3_table[1][val_i12] : # Cas où index 12 arrive avant index 0
+        if DC3_table[1][val_i0] > DC3_table[1][val_i12] : # Cas o羅 index 12 arrive avant index 0
             index_012.append(index_12[i_12])
             i_12 += 1
-        elif DC3_table[1][val_i0] < DC3_table[1][val_i12] : # Cas où index 0 arrive avant index 12
+        elif DC3_table[1][val_i0] < DC3_table[1][val_i12] : # Cas o羅 index 0 arrive avant index 12
             index_012.append(index_0[i_0])
             i_0 += 1
-        else : # Cas d'égalité sur l'indice : si les 2 indexes renvoient le même nombre 
+        else : # Cas d'矇galit矇 sur l'indice : si les 2 indexes renvoient le m礙me nombre 
             if index_12[i_12] % 3 == 1 :
-                if index_12_dict[val_i0 + 1] > index_12_dict[val_i12 + 1] : # Cas où index 12 au deuxième terme arrive avant index 0 au deuxième terme
+                if index_12_dict[val_i0 + 1] > index_12_dict[val_i12 + 1] : # Cas o羅 index 12 au deuxi癡me terme arrive avant index 0 au deuxi癡me terme
                     index_012.append(index_12[i_12])
                     i_12 += 1
-                else : # Cas où index 0 au deuxième terme arrive avant index 12 au deuxième terme
+                else : # Cas o羅 index 0 au deuxi癡me terme arrive avant index 12 au deuxi癡me terme
                     index_012.append(index_0[i_0])
                     i_0 += 1
             else :
-                if DC3_table[1][val_i0 + 1] > DC3_table[1][val_i12 + 1] : # On teste dabord cas où index 12 + 1 arrive avant index 0 + 1
+                if DC3_table[1][val_i0 + 1] > DC3_table[1][val_i12 + 1] : # On teste dabord cas o羅 index 12 + 1 arrive avant index 0 + 1
                     index_012.append(index_12[i_12])
                     i_12 += 1
-                elif DC3_table[1][val_i0 + 1] < DC3_table[1][val_i12 + 1] : # Cas où index 0 + 1 arrive avant index 12 + 1
+                elif DC3_table[1][val_i0 + 1] < DC3_table[1][val_i12 + 1] : # Cas o羅 index 0 + 1 arrive avant index 12 + 1
                     index_012.append(index_0[i_0])
                     i_0 += 1
-                elif index_12_dict[val_i0 + 2] > index_12_dict[val_i12 + 2] : # Cas où index 12 au deuxième terme arrive avant index 0 au troisième terme
+                elif index_12_dict[val_i0 + 2] > index_12_dict[val_i12 + 2] : # Cas o羅 index 12 au deuxi癡me terme arrive avant index 0 au troisi癡me terme
                     index_012.append(index_12[i_12])
                     i_12 += 1
-                else : # Cas où index 0 au troisième terme arrive avant index 12 au deuxième terme
+                else : # Cas o羅 index 0 au troisi癡me terme arrive avant index 12 au deuxi癡me terme
                     index_012.append(index_0[i_0])
                     i_0 += 1
     
     index_012.extend(index_12[i_12:]) # Si 1 des deux index est encore plein, on ajoute son contenu
     index_012.extend(index_0[i_0:])
 
-    if int(DC3_table[1][index_012[0]]) == 0 : # On enlève le terme sentinel s'il est présent
+    if int(DC3_table[1][index_012[0]]) == 0 : # On enl癡ve le terme sentinel s'il est pr矇sent
         index_012 = index_012[1:]
 
     if len(P_12_base) > 0 : # Mapping sur recursion -1 si existe
@@ -254,7 +254,7 @@ def DC3(S, P_12_base = []) :
         index_012 = new_index_012
    
 
-    return index_012 # Retourne le suffix array si dernière récursion
+    return index_012 # Retourne le suffix array si derni癡re r矇cursion
 
 def BWT(text,suffix_table):
     """
@@ -300,7 +300,7 @@ def pattern_matching_BWT(S,pattern,bwt,index,somme):
     X = lpattern[i]
     for tpl in somme :
         if tpl[0]<X:
-            e = tpl[1]+1 ##donne place du premier char dans la liste ordonnée
+            e = tpl[1]+1 ##donne place du premier char dans la liste ordonn矇e
         if tpl[0]==X:
             f = tpl[1]-1 ##donne place du dernier char
 
@@ -320,7 +320,7 @@ def pattern_matching_BWT(S,pattern,bwt,index,somme):
                 for tpl in somme :
                     if tpl[0]<Y:
                         prev = tpl[1]
-                e = prev + idx ##car l'index commence à 1 et non 0
+                e = prev + idx ##car l'index commence � 1 et non 0
                 start_string = e
 
         char_found = False
@@ -334,7 +334,7 @@ def pattern_matching_BWT(S,pattern,bwt,index,somme):
                 for tpl in somme :
                     if tpl[0]<Y:
                         prev = tpl[1]
-                f = prev + idx ##car l'index commence à 1 et non 0
+                f = prev + idx ##car l'index commence � 1 et non 0
                 end_string = f
         if suite_impos :## this will stop the loop if no char has been found in the previous one
             break
@@ -343,7 +343,7 @@ def pattern_matching_BWT(S,pattern,bwt,index,somme):
         i = 0
         pattern_in_S = False
         return pattern_in_S,start_string,end_string
-    ##dans le cas où e = f, il faut vérifier que le reste du substring est bon
+    ##dans le cas o羅 e = f, il faut v矇rifier que le reste du substring est bon
     if i > 0 :
         while i > 0 :
             if L[e] != lpattern[i-1]:
@@ -392,9 +392,9 @@ def string_location(text,string,matches,suffix_table):
     return(list_occur)
 
 def k_positioning(text,patt,bwt,suffix_table,index,somme):##permet d'obtenir la liste des positions
-    ##recuperation des positions des premiers et derniers patterns trouvés
+    ##recuperation des positions des premiers et derniers patterns trouv矇s
     mat = pattern_matching_BWT(text,patt,bwt,index,somme)
-    ##recupération et renvoi des positions de tout les patterns
+    ##recup矇ration et renvoi des positions de tout les patterns
     return string_location(text,patt,mat,suffix_table)
 
 def prepare_reads(data,k):
@@ -418,7 +418,7 @@ def prepare_reads(data,k):
     pres_list = []
     i = 0
     temp_pres_list = []
-    for kmer_seq, seq_name, kmer_pos, pos_genom_list in tqdm(data, desc = "Liaison des kmer de séquence n°") :
+    for kmer_seq, seq_name, kmer_pos, pos_genom_list in tqdm(data, desc = "Liaison des kmer de s矇quence n簞") :
         if (seq_name==stock_seq_name):
             read_pos.append(pos_genom_list)
         else :
@@ -488,11 +488,11 @@ def link_reads (l_pos,k):
 
 def export_result(result, list_genom) :
     """
-    Ecrit les r�sultats obtenus du mapping pour chaque read dans un fichier texte
+    Ecrit les r廥ultats obtenus du mapping pour chaque read dans un fichier texte
     """
     longueur_read = 100 #Ici on sait que c'est 100, changer en detection automatique si j'ai le temps
-    with open("result.txt", 'w') as f: # On ouvre le fichier r�sultat
-            f.write("Name_seq" + "\t" + "\t" + "Find ?" + "\t" + "Where : n� chromosome brin : start" + "\n") # On �crit le header
+    with open("result.txt", 'w') as f: # On ouvre le fichier r廥ultat
+            f.write("Name_seq" + "\t" + "\t" + "Find ?" + "\t" + "Where : n� chromosome brin : start" + "\n") # On 嶰rit le header
             for i in range(len(result)) :
                 line = result[i][0]
                 find = False
@@ -520,21 +520,21 @@ def export_result(result, list_genom) :
 
 now = datetime.now()
 
-k = 10 # On défini k, la longueur de chaque kmers
-by_DC3 = False # True : on calcule la DC3 depuis les données, False : on la récupère depuis le fichier de sauvegarde
+k = 10 # On d矇fini k, la longueur de chaque kmers
+by_DC3 = False # True : on calcule la DC3 depuis les donn矇es, False : on la r矇cup癡re depuis le fichier de sauvegarde
 
-list_genom = genome_import() # On récupère la séquence du génome, chaque chromose étant compartimenté dans la liste
+list_genom = genome_import() # On r矇cup癡re la s矇quence du g矇nome, chaque chromose 矇tant compartiment矇 dans la liste
 
-list_reads= reads_import_cuts(k) # On récupère les reads obtenu lors du séquençage et on les découpes, chaque élément de la liste correspond à 1 kmer
+list_reads= reads_import_cuts(k) # On r矇cup癡re les reads obtenu lors du s矇quen癟age et on les d矇coupes, chaque 矇l矇ment de la liste correspond � 1 kmer
 
-# On crée le brin inverse complémentaire du génome :
+# On cr矇e le brin inverse compl矇mentaire du g矇nome :
 list_genom_inv = []
 for data in list_genom :
     genom = Seq(data[0])
     genom = genom.reverse_complement()
     list_genom_inv.append([str(genom), data[1] + " : compl inv"])
 
-# On calcule/importe la table des suffixes pour les génomes  
+# On calcule/importe la table des suffixes pour les g矇nomes  
 
 if by_DC3 == True :
     # Brin sens
@@ -542,7 +542,7 @@ if by_DC3 == True :
         data = DC3(list_genom[i][0] + "$")
         list_genom[i].append(data)
     # Brin anti-sens
-    for i in tqdm(range(len(list_genom_inv)), desc = "Calcul DC3 brin compl�mentaire inverse") :
+    for i in tqdm(range(len(list_genom_inv)), desc = "Calcul DC3 brin compl幦entaire inverse") :
         data = DC3(list_genom_inv[i][0] + "$")
         list_genom_inv[i].append(data)
     
@@ -590,7 +590,7 @@ for i in tqdm(range(len(list_genom)), desc = "Mapping sur chromosome brin sens")
     full_mapping.append(actual_mapping)
     actual_mapping = []
 
-# et sur le brin complémentaire :
+# et sur le brin compl矇mentaire :
 actual_mapping = [] # Liste temporaire qui accueille le mapping de chaque kmer par chromosome
 for i in tqdm(range(len(list_genom_inv)), desc = "Mapping sur chromosome brin anti-sens") :
     bwt = BWT(list_genom_inv[i][0] + "$",list_genom_inv[i][2])
@@ -616,7 +616,7 @@ for i in tqdm(range(len(list_genom_inv)), desc = "Mapping sur chromosome brin an
     actual_mapping = []
 
     
-# On réorganise les données pour associer à chaque kmer sa liste de position pour tout les chromosomes et dans les deux sens
+# On r矇organise les donn矇es pour associer � chaque kmer sa liste de position pour tout les chromosomes et dans les deux sens
 for i in range(len(full_mapping[0])) :
     list_reads[100000 + i].append([full_mapping[0][i], full_mapping[1][i], full_mapping[2][i], full_mapping[3][i], full_mapping[4][i], full_mapping[5][i],
                           full_mapping[6][i], full_mapping[7][i], full_mapping[8][i], full_mapping[9][i], full_mapping[10][i], full_mapping[11][i],
@@ -625,10 +625,10 @@ for i in range(len(full_mapping[0])) :
                           full_mapping[21][i], full_mapping[22][i], full_mapping[23][i], full_mapping[24][i], full_mapping[25][i], full_mapping[26][i],
                           full_mapping[27][i], full_mapping[28][i], full_mapping[29][i]]) #tout les chromosomes brin anti-sens
 
-# On teste la possibilité de présence de la séquenbce :
+# On teste la possibilit矇 de pr矇sence de la s矇quenbce :
 result = prepare_reads(list_reads[100000:200000], k)
 
 export_result(result, list_genom)
 
 time_imp = datetime.now() - now
-print("Travail effectu� en", time_imp)
+print("Travail effectu� en", time_imp)
