@@ -12,16 +12,16 @@ Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
 4273			Y		C			P
 Chromosome 8 :
 Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
-9033	
-5577	
-7852	
-4353	
-8483	
-2941	
-1141	
-2619	
-1649	
-4021	
+9033			Y		C			M
+5577			N
+7852			Y		C			M
+4353			Y		C			M
+8483			Y		C			M
+2941			Y		C			M
+1141			Y		C			M
+2619			Y		C			P
+1649			Y		C			M
+4021			Y		C			P
 Chromosome 9 :
 Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
 5024	
@@ -36,16 +36,16 @@ Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
 72	
 Chromosome 10 :
 Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
-7289	
-8245	
-2041	
-5503	
-7042	
-6627	
-971	
-2517	
-5023	
-5960	
+7289			Y		C			P
+8245			Y		C			P
+2041			Y		C			P
+5503			Y		C			P
+7042			N
+6627			Y		C			P
+971			Y		C			M
+2517			Y		C			P
+5023			Y		C			P
+5960			Y		C			P
 Chromosome 11 :
 Ligne dans le.txt	Find?(Y/N)	Correct in BAM ?(C/I)	Precision(P/M)
 9846	
