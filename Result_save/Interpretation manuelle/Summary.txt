@@ -1,6 +1,5 @@
 Efficacité du programme : (annotation manuelle)
 
-
 Pour Chromosome 1, sur l'échantillon aléatoire du fichier vect_ale_chr.txt :
 Total = 200
 Nb de positions non mappées = 29
@@ -12,18 +11,34 @@ Pourcentage attendu sur le chromosome :
 % positions non mappées = 14,5%
 % positions mal mappées = 0%
 % positions correctement mappées = 80,5%, dont 53,4% sans mutation
-% positions incertaines = 4,0%
+% positions incertaines = 4%
 
-(Comme c'est plus facile à chercher : on sait que positions non mappées dans le chromosome = 
-donc % positions non mappées réel = 13016 sur 100000
-le pourcentage estimé est donc de 13,0% par rapport à la réalité, donc on semble surestimer le pourcentage
-de positions non mappées en défaveur des correctement mappées très probablement
-Au vu des résultats en cumulant les positions muté, non mappées et incertaines on estime le taux d'erreur du 
-séquençage  à 56%, toujours même problème avec une probabillité forte de sur-estimer ce pourcentage)
+Comme c'est plus facile à chercher : on sait que positions non mappées dans le chromosome = 13016 sur 100000, donc % positions non mappées réel = 13,0%.
+Le pourcentage estimé est donc différent de 1,5% par rapport à la réalité, on semble surestimer ce pourcentage de positions non mappées en défaveur des correctement mappées très probablement.
+Au vu des résultats en cumulant les positions muté, non mappées et incertaines on estime le taux d'erreur du séquençage  à 56%, toujours même problème avec une probabillité forte de sur-estimer ce pourcentage
+
+
+
+On essaye d'agrandir l'échantillon à 250:
+
+Total = 250
+Nb de positions non mappées = 34
+Nb de positions mal mappées = 1
+Nb de positions correctement mappées = 205, dont 108 sans mutations
+Nb de positions incertaines = 10
+
+Pourcentage attendu sur le chromosome :
+% positions non mappées = 13,6%
+% positions mal mappées = 0,4%
+% positions correctement mappées = 82%, dont 52,7% sans mutation
+% positions incertaines = 4%
+
+On se rapproche du pourçentage réel et les conclusions sont assez similaires à précedemment, on gagne un peu en précision à la limite.
+
 
 
 Pour le génome, sur l'échantillon aléatoire du fichier vect_ale_gen.txt :
-Total = 100 * 15 = 1500
+Total = 10 * 15 = 150
 Nb de positions non mappées = 
 Nb de positions mal mappées =
 Nb de positions correctement mappées = 
